@@ -1,0 +1,28 @@
+# import Launch from "Launch.graphql"
+# import LaunchConnection from "LaunchConnection.graphql"
+# import TripUpdateResponse from "TripUpdateResponse.graphql"
+# import User from "User.graphql"
+
+type Query {
+  launches(
+    """
+    表示する結果の数（1以上）、デフォルトは20
+    """
+    pageSize: Int
+    """
+    カーソル（データリスト内にある特定のアイテムにマークを付けたトークン）
+    カーソルを指定した場合、そのカーソルを起点として、pageSize で指定した数のデータを返す
+    """
+    after: String
+  ): LaunchConnection!
+  launch(id: ID!): Launch
+  me: User
+}
+
+type Mutation {
+  bookTrips(launchIds: [ID]!): TripUpdateResponse!
+
+  cancelTrip(launchId: ID!): TripUpdateResponse!
+
+  login(email: String): String
+}

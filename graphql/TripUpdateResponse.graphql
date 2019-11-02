@@ -1,0 +1,7 @@
+# import Launch from "Launch.graphql"
+
+type TripUpdateResponse {
+  success: Boolean!
+  message: String
+  launches: [Launch]
+}

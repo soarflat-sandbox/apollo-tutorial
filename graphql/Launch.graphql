@@ -1,0 +1,10 @@
+# import Mission from "Mission.graphql"
+# import Rocket from "Rocket.graphql"
+
+type Launch {
+  id: ID!
+  site: String
+  mission: Mission
+  rocket: Rocket
+  isBooked: Boolean!
+}

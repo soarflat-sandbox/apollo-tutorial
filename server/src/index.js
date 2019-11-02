@@ -1,17 +1,25 @@
 const { ApolloServer } = require('apollo-server');
+const { importSchema } = require('graphql-import');
+const { makeExecutableSchema } = require('graphql-tools');
 const isEmail = require('isemail');
+const path = require('path');
 
-const typeDefs = require('./schema');
 const { createStore } = require('./utils');
 const resolvers = require('./resolvers');
+const typeDefs = importSchema(
+  path.join(__dirname, '../../graphql/schema.graphql')
+);
 const LaunchAPI = require('./datasources/launch');
 const UserAPI = require('./datasources/user');
 
+const schema = makeExecutableSchema({
+  resolvers,
+  typeDefs
+});
 const store = createStore();
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   // リクエストオブジェクトが呼び出される関数
   // このリクエストオブジェクトから認証用のヘッダーを取得する
   context: async ({ req }) => {
