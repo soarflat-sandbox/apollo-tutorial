@@ -1,0 +1,9 @@
+enum PatchSize {
+  SMALL
+  LARGE
+}
+
+type Mission {
+  name: String
+  missionPatch(mission: String, size: PatchSize): String
+}
